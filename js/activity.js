@@ -1,5 +1,3 @@
-
-
 function addTag(tag) {
 	var str = $("#activity-input").val();
 	var last = str.charAt(str.length-1);
@@ -116,7 +114,7 @@ $("#activity-input").keypress(function(event){
 				addActivity(text);
 			}
 		}
-    	return false;
+  	return false;
 	}
 });
 

@@ -50,6 +50,7 @@ $_SESSION['timeout'] = time();
 			</div>
 		</div>
 	</nav>
+
 	<div class="jumbotron">
 		<div class="container">
 			<div class="row">
@@ -81,7 +82,7 @@ $_SESSION['timeout'] = time();
 			</div>
 			<div class="row">
 				<div id="input-group" class="form-group">
-					<div class="col-xs-12 col-md-12"><textarea class="form-control input-lg" id="activity-input" type="text" placeholder="Doing something with #project-name (start with 'td+space' to add to do list)" rows="1" style="resize: none;"></textarea></div>
+					<div class="col-xs-12 col-md-12"><textarea class="form-control input-lg" id="activity-input" type="text" placeholder="Doing something with #project-name (start with '+' to add to do list)" rows="1" style="resize: none;"></textarea></div>
 					<span id="help-block" class="help-block" style="display:none; padding-left:20px">You must include at least 1 tag.</span>
 				</div>
 			</div>
@@ -110,8 +111,6 @@ $_SESSION['timeout'] = time();
 				</div>
 			</div>
 
-			<div class="col-xs-12 col-sm-8 col-md-9" id="activity">
-			</div>
 			<div class="hidden-xs col-xs-12 col-sm-4 col-md-3">
 				<div class="row">
 					<div class="col-xs-12 col-sm-12 col-md-12">
@@ -149,6 +148,9 @@ $_SESSION['timeout'] = time();
 					</div>
 				</div>
 			</div>
+
+			<div class="col-xs-12 col-sm-8 col-md-9" id="activity"></div>
+
 		</div>
 	</div>
 
