@@ -1,0 +1,205 @@
+.vdo{
+    margin-left: auto;
+    margin-right: 0;
+    display: block;
+}
+
+.topic{
+    height: 300px;
+    position: relative;
+}
+
+@media(min-width:768px){
+   h2{
+        display: table-cell;
+        vertical-align: middle;
+        height: 300px;
+    } 
+}
+
+
+.xs-text{
+    margin-top:20px;
+    margin-left: 5%;
+}
+
+.speaker-div{
+    height: 200px;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.speaker{
+    height: 120px;
+    left: 0;
+    display: block;
+}
+
+.speaker-text{
+    font-size: 1.2em;
+    color: #464646;
+    height: 120px;
+    line-height: 120px;
+}
+span{
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1.2em; /* <-- adjust this */
+}
+
+.speaker-img-div{
+    padding-left: 0;
+}
+
+.speaker-img{
+    border: 10px solid rgba(1,1,1,0);
+    transition: border 0.2s linear;
+    -o-transition: border 0.2s linear; /* opera */
+    -ms-transition: border 0.2s linear; /* IE 10 */
+    -moz-transition: border 0.2s linear; /* Firefox */
+    -webkit-transition: border 0.2s linear;
+    box-sizing: border-block;
+    height: 120px;
+    vertical-align: middle;
+}
+
+.slide{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+@media (min-width:768px) and (max-width:990px) {
+    .speaker-text{
+        font-size: 1.2em;
+        color: #464646;
+        height: 60px;
+        line-height: 60px;
+    }
+    .speaker{
+        height: 60px;
+        left: 0;
+        display: block;
+    }
+
+    .speaker-img{
+        border: 10px solid rgba(1,1,1,0);
+        transition: border 0.2s linear;
+        -o-transition: border 0.2s linear; /* opera */
+        -ms-transition: border 0.2s linear; /* IE 10 */
+        -moz-transition: border 0.2s linear; /* Firefox */
+        -webkit-transition: border 0.2s linear;
+        box-sizing: border-block;
+        height: 100px;
+        vertical-align: middle;
+    }
+    .speaker-div{
+        height: 140px;
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+}
+
+@media(max-width:768px){
+    .speaker-text{
+        font-size: 1.2em;
+        color: #464646;
+        height: 100px;
+        line-height: 100px;
+    }
+    .speaker{
+        height: 100px;
+        left: 0;
+        display: block;
+    }
+
+    .speaker-img{
+        border: 10px solid rgba(1,1,1,0);
+        transition: border 0.2s linear;
+        -o-transition: border 0.2s linear; /* opera */
+        -ms-transition: border 0.2s linear; /* IE 10 */
+        -moz-transition: border 0.2s linear; /* Firefox */
+        -webkit-transition: border 0.2s linear;
+        box-sizing: border-block;
+        height: 100px;
+        vertical-align: middle;
+    }
+    .speaker-div{
+        height: 120px;
+        display: table-cell;
+        vertical-align: middle;
+    }
+    .topic{
+        height: 120px;
+        position: relative;
+    }
+    .slide{
+        height: 80px;
+        right: 0;
+
+    }
+    .slide-btn{
+        height: 80px;
+        position: absolute;
+        right: 0;
+    }
+    span{
+        position: relative;
+        width:120%;
+    }
+}
+
+@media(max-width:560px){
+    .speaker-text{
+        font-size: 1.2em;
+        color: #464646;
+        height: 100px;
+        line-height: 100px;
+    }
+    .speaker{
+        height: 100px;
+        left: 0;
+        display: block;
+    }
+
+    .speaker-img{
+        border: 10px solid rgba(1,1,1,0);
+        transition: border 0.2s linear;
+        -o-transition: border 0.2s linear; /* opera */
+        -ms-transition: border 0.2s linear; /* IE 10 */
+        -moz-transition: border 0.2s linear; /* Firefox */
+        -webkit-transition: border 0.2s linear;
+        box-sizing: border-block;
+        height: 100px;
+        vertical-align: middle;
+    }
+    .speaker-div{
+        height: 120px;
+        display: table-cell;
+        vertical-align: middle;
+    }
+    .topic{
+        height: 120px;
+        position: relative;
+    }
+    .slide{
+        left: 0;
+        display: table-cell;
+        vertical-align: baseline;
+        top: 130px;
+    }
+    .slide-btn{
+        left: 0;
+        display: block;
+    }
+    span{
+        position: relative;
+        width:120%;
+    }
+    hr{
+        margin-top: 60px;
+    }
+}
+
+
+
