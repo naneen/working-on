@@ -109,7 +109,7 @@ $("#activity-input").keypress(function(event){
 			var text = $("#activity-input").val().trim();
 			var firstTwo = text.substring(0, 1);
 			if(firstTwo == "+"){
-				addToDo(text);
+				addToDo(text.substring(1, text.length));
 				var waitToPost = false;
 			}
 			else {

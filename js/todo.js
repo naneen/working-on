@@ -1,31 +1,29 @@
-function addToDo(text){
-  var todo = text.substring(1, text.length).trim();;
+function addToDo(todo){
   var markup = '<li><div class="checkbox"><label><input type="checkbox" value="" />'+ todo +'</label></div></li>';
+  console.log(todo);
   $("#sortable").append(markup);
-  $("#activity-input").val('')
+  $("#activity-input").val('');
 
   $.ajax({
     type: 'POST',
-    data: { status_text: text },
-    url: 'php/post_status.php',
+    data: { status_text: todo },
+    url: 'php/add_to_do.php',
     dataType: 'json',
 
     success: function(result){
       if(result.status == 1) {
-        document.location.reload(true);
-        console.log('post result : success');
+        // document.location.reload(true);
+        console.log(todo);
       }
-      // else {
-      //   $("#input-group").addClass("has-error");
-      //   $("#help-block").show();
-      // }
-      // waitToPost = false;
-      // $("#activity-input").attr("disabled",false);
+      else {
+        $("#input-group").addClass("has-error");
+        $("#help-block").show();
+      }
+      $("#activity-input").attr("disabled",false);
     },
 
     error: function(result) {
       alert(result.responseText);
-      waitToPost = false;
       $("#activity-input").attr("disabled",false);
     }
   });
