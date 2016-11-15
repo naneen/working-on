@@ -1,13 +1,12 @@
 function addToDo(todo){
   var markup = '<li><div class="checkbox"><label><input type="checkbox" value="" />'+ todo +'</label></div></li>';
-  console.log(todo);
   $("#sortable").append(markup);
   $("#activity-input").val('');
 
   $.ajax({
     type: 'POST',
     data: { status_text: todo },
-    url: 'php/add_to_do.php',
+    url: 'php/post_to_do.php',
     dataType: 'json',
 
     success: function(result){
