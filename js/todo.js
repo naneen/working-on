@@ -105,12 +105,17 @@ console.log(lists);
   		}
     }
 
-		var str = '<li><div class="checkbox"><label><input type="checkbox" value="" />'+ task +'</label></div></li>';
+		var str = '<li><div class="checkbox"><label onClick="crossOut('+lists[i].to_do_id+')"><input type="checkbox" value="'+ lists[i].to_do_id +'"/><span class="sp'+ lists[i].to_do_id +'">'+ task +'</span></label></div></li>';
 
 		strHTML = strHTML + str;
 	}
   strHTML += "</td></tr></tbody>";
 	return strHTML;
+}
+
+function crossOut(to_do_id) {
+  console.log("to do id = "+to_do_id);
+  $('.sp'+to_do_id).css('textDecoration','line-through');
 }
 
 // function getToDoList(lists) {
