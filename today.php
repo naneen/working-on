@@ -95,20 +95,21 @@ $_SESSION['timeout'] = time();
 	</div>
 
 
-	</div>
-
 	<div class="container">
 		<div class="row">
 
 			<div class="col-xs-12 col-sm-8 col-md-9">
-				<div class="panel panel-default">
-				  <div class="panel-heading">
-				    <h3 class="panel-title">To do list</h3>
-				  </div>
-				  <div class="panel-body" id="todolist">
-						<ul id="sortable" class="list-unstyled"></ul>
-				  </div>
-				</div>
+
+					<div class="panel panel-default">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">To do list</h3>
+					  </div>
+					  <div class="panel-body" id="todolist">
+							<ul id="sortable" class="list-unstyled"></ul>
+					  </div>
+					</div>
+
+				<div id="activity"></div>
 			</div>
 
 			<div class="hidden-xs col-xs-12 col-sm-4 col-md-3">
@@ -148,8 +149,6 @@ $_SESSION['timeout'] = time();
 					</div>
 				</div>
 			</div>
-
-			<div class="col-xs-12 col-sm-8 col-md-9" id="activity"></div>
 
 		</div>
 	</div>
