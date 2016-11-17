@@ -29,11 +29,17 @@ $.ajax({
 	dataType: 'json',
 
 	success: function(result) {
-    var tableHTML = '<table class="table table-bordered"><thead><tr id="tag_text">' + getTagInList(result.todos) + '</tr></thead><tbody><tr><td><ul id="todolist" class="list-unstyled">' + getToDoList(result.todos) + '</ul></td><td>Otto</td><td>@mdo</td></tr></tbody></table>';
+    if(result.todos.length > 0) {
+      var tableHTML = '<table class="table table-bordered"><thead><tr id="tag_text">' + getTagInList(result.todos) + '</tr></thead><tbody><tr><td><ul id="todolist" class="list-unstyled">' + getToDoList(result.todos) + '</ul></td><td>Otto</td><td>@mdo</td></tr></tbody></table>';
 
-    $(".panel-body").append(tableHTML);
-    // $("#tag_text").append(getTagInList(result.todos));
-		// $("#todolist").append(getToDoList(result.todos));
+      $(".panel-body").append(tableHTML);
+      // $("#tag_text").append(getTagInList(result.todos));
+  		// $("#todolist").append(getToDoList(result.todos));
+    }
+    else {
+      var tableHTML = "You didn't add anything to the list.";
+      $(".panel-body").append(tableHTML);
+    }
 	},
 
 	error: function(result) {
