@@ -100,14 +100,26 @@ $_SESSION['timeout'] = time();
 
 			<div class="col-xs-12 col-sm-8 col-md-9">
 
-					<div class="panel panel-default">
-					  <div class="panel-heading">
-					    <h3 class="panel-title">To do list</h3>
-					  </div>
-					  <div class="panel-body" id="todolist">
-							<ul id="sortable" class="list-unstyled"></ul>
-					  </div>
+				<div class="panel panel-default">
+				  <div class="panel-heading">
+				    <h3 class="panel-title">To do list</h3>
+				  </div>
+				  <div class="panel-body">
+						<!-- <table class="table table-bordered">
+						  <thead>
+						    <tr id="tag_text">
+						    </tr>
+						  </thead>
+						  <tbody>
+						    <tr>
+						      <td><ul id="todolist" class="list-unstyled"></ul></td>
+						      <td>Otto</td>
+						      <td>@mdo</td>
+						    </tr>
+						  </tbody>
+						</table> -->
 					</div>
+				</div>
 
 				<div id="activity"></div>
 			</div>
