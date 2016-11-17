@@ -12,7 +12,6 @@ if ($conn->connect_error) {
 	die("Connection failed: " . $conn->connect_error);
 }
 
-// $sql = "SET SESSION SQL_BIG_SELECTS=1; SELECT p.id owner_id, a.id activity_id, p.firstname, a.status_text status_text, a.start_time, a.end_time, a.updated_at, CURRENT_TIMESTAMP AS 'time', IF( ISNULL(a.status_text), 0, IF(ISNULL(a.end_time), 1, 2) ) online FROM person p LEFT JOIN ( SELECT a1.* FROM ( SELECT * FROM activity WHERE activity.delete = 0 ) a1 LEFT JOIN ( SELECT * FROM activity WHERE activity.delete = 0 ) a2 ON( a1.owner_id = a2.owner_id AND a1.id < a2.id ) WHERE a2.id IS NULL ) a ON p.id = a.owner_id WHERE p.status = 1 AND a.updated_at >= CURRENT_DATE ORDER BY a.updated_at DESC";
 $sql = "SELECT p.id owner_id, a.id activity_id, p.firstname, a.status_text status_text, a.start_time, a.end_time, a.updated_at, CURRENT_TIMESTAMP AS 'time', IF( ISNULL(a.status_text), 0, IF(ISNULL(a.end_time), 1, 2) ) online FROM person p LEFT JOIN ( SELECT a1.* FROM ( SELECT * FROM activity WHERE activity.delete = 0 ) a1 LEFT JOIN ( SELECT * FROM activity WHERE activity.delete = 0 ) a2 ON( a1.owner_id = a2.owner_id AND a1.id < a2.id ) WHERE a2.id IS NULL ) a ON p.id = a.owner_id WHERE p.status = 1 AND a.updated_at >= CURRENT_DATE ORDER BY a.updated_at DESC";
 $conn->query('SET SQL_BIG_SELECTS=1');
 
