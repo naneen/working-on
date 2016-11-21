@@ -30,13 +30,13 @@ $.ajax({
 
 	success: function(result) {
     if(result.todos.length > 0) {
-      var tableHTML = "<table class='table table-bordered'><thead><tr id='tag_text'>" + getTagInList(result.todos) + getToDoList(result.todos);
+      var tableHTML = "<div class='table-responsive'><table class='table table-bordered'><thead><tr id='tag_text'>" + getTagInList(result.todos) + getToDoList(result.todos) + "</div>";
 
-      $(".panel-body").append(tableHTML);
+      $(".panel").append(tableHTML);
     }
     else {
-      var tableHTML = "You didn't add anything to the list.";
-      $(".panel-body").append(tableHTML);
+      var tableHTML = "<div class='panel-body'>You didn't add anything to the list.</div>";
+      $(".panel").append(tableHTML);
     }
 	},
 
@@ -55,7 +55,6 @@ function getTagInList(lists) {
   }
   // unique values in an array
   unique = tag_list.filter((v, i, a) => a.indexOf(v) === i);
-  console.log("unique : "+unique);
 
   for (var i = 0; i < unique.length; i++) {
     theadHTML += "<th>" + unique[i] + "</th>";
@@ -66,8 +65,6 @@ function getTagInList(lists) {
 function getToDoList(lists) {
 	var strHTML = "<tbody><tr>";
   var previousTag = "";
-
-  console.log(lists);
 
 	for(var i=0; i<lists.length; i++) {
     var owner_id = lists[i].owner_id;
@@ -108,7 +105,7 @@ function getToDoList(lists) {
   		}
     }
 
-		var str = '<li><div class="checkbox"><label onClick="crossOut('+lists[i].to_do_id+')"><input type="checkbox" value="'+ lists[i].to_do_id +'"/><span class="sp'+ lists[i].to_do_id +'">'+ task +'</span></label></div></li>';
+		var str = '<li><div class="checkbox"><label onClick="crossOut('+lists[i].to_do_id+')"><input type="checkbox" class="cb'+ lists[i].to_do_id +'"/><span class="sp'+ lists[i].to_do_id +'">'+ task +'</span></label></div></li>';
 
 		strHTML = strHTML + str;
 	}
@@ -117,6 +114,15 @@ function getToDoList(lists) {
 }
 
 function crossOut(to_do_id) {
-  console.log("to do id = "+to_do_id);
-  $('.sp'+to_do_id).css('textDecoration','line-through');
+  console.log("=========\n"+"to do id = "+to_do_id);
+  var checked = $('.cb'+to_do_id).is(":checked");
+    if (checked) {
+      $('.sp'+to_do_id).css('textDecoration','line-through');
+      $('.cb'+to_do_id).prop('checked', true);
+      console.log(checked);
+    } else {
+      $('.sp'+to_do_id).css('textDecoration','none');
+      $('.cb'+to_do_id).prop('checked', false);
+      console.log(checked);
+    }
 }
