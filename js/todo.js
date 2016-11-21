@@ -51,10 +51,11 @@ function getTagInList(lists) {
   var theadHTML = "";
 
   for (var i = 0; i < lists.length; i++) {
-    tag_list.push(lists[i].tag_id);
+    tag_list.push(lists[i].tag_name);
   }
   // unique values in an array
   unique = tag_list.filter((v, i, a) => a.indexOf(v) === i);
+  console.log("unique : "+unique);
 
   for (var i = 0; i < unique.length; i++) {
     theadHTML += "<th>" + unique[i] + "</th>";
@@ -65,7 +66,9 @@ function getTagInList(lists) {
 function getToDoList(lists) {
 	var strHTML = "<tbody><tr>";
   var previousTag = "";
-console.log(lists);
+
+  console.log(lists);
+
 	for(var i=0; i<lists.length; i++) {
     var owner_id = lists[i].owner_id;
 		var owner_name = lists[i].owner_name;
@@ -117,32 +120,3 @@ function crossOut(to_do_id) {
   console.log("to do id = "+to_do_id);
   $('.sp'+to_do_id).css('textDecoration','line-through');
 }
-
-// function getToDoList(lists) {
-// 	var strHTML = ""
-//
-// 	for(var i=0; i<lists.length; i++) {
-// 		var owner_id = lists[i].owner_id;
-// 		var owner_name = lists[i].owner_name;
-//
-// 		var task = " ";
-// 		if(lists[i].task) {
-// 			var task_arr = lists[i].task.split(" ");
-// 			var tmp_str = "";
-// 			for(var j=0; j<task_arr.length; j++) {
-// 				tmp_str = task_arr[j];
-// 				if(tmp_str.substring(0,1) == "#") {
-// 					var tmp_str = task_arr[j].slice(1);
-// 					tmp_str = "<code><a href='project.php?tag=" + tmp_str + "'>#" + tmp_str + "</a></code>"
-// 				}
-// 				tmp_str = tmp_str + " ";
-// 				task = task + " " + tmp_str;
-// 			}
-// 		}
-//
-// 		var str = '<li><div class="checkbox"><label><input type="checkbox" value="" />'+ task +'</label></div></li>';
-//
-// 		strHTML = strHTML + str;
-// 	}
-// 	return strHTML;
-// }
