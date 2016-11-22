@@ -100,11 +100,12 @@ $_SESSION['timeout'] = time();
 
 			<div class="col-xs-12 col-sm-8 col-md-9">
 
-				<div class="panel panel-default">
-				  <div class="panel-heading">
-				    <h3 class="panel-title">To do list</h3>
-					</div>
+				<div class="todo">
+					<h1><strong>To do list</strong></h1>
+					<div class='panel-body'></div>
 				</div>
+
+				<hr id="divider">
 
 				<div id="activity"></div>
 			</div>

@@ -30,9 +30,10 @@ $.ajax({
 
 	success: function(result) {
     if(result.todos.length > 0) {
-      var tableHTML = "<div class='table-responsive'><table class='table table-bordered'><thead><tr id='tag_text'>" + getTagInList(result.todos) + getToDoList(result.todos) + "</div>";
+      // var tableHTML = "<div class='table-responsive'><table class='table table-bordered'><thead><tr id='tag_text'>" + getTagInList(result.todos) + getToDoList(result.todos) + "</div>";
+      var tableHTML = getToDoList(result.todos);
 
-      $(".panel").append(tableHTML);
+      $(".panel-body").append(tableHTML);
     }
     else {
       var tableHTML = "<div class='panel-body'>You didn't add anything to the list.</div>";
@@ -64,6 +65,7 @@ function getTagInList(lists) {
 
 function getToDoList(lists) {
 	var strHTML = "<tbody><tr>";
+  var strHTML = "";
   var previousTag = "";
 
 	for(var i=0; i<lists.length; i++) {
@@ -71,58 +73,94 @@ function getToDoList(lists) {
 		var owner_name = lists[i].owner_name;
     var task = " ";
 
-    if (lists[i].tag_id != previousTag){
-      previousTag = lists[i].tag_id;
-      strHTML += "<td><ul class='list-unstyled'>";
+    // if (lists[i].tag_id != previousTag){
+    //   previousTag = lists[i].tag_id;
+    //   strHTML += "<td><ul class='list-unstyled'>";
+    //
+    //   if(lists[i].task) {
+  	// 		var task_arr = lists[i].task.split(" ");
+  	// 		var tmp_str = "";
+  	// 		for(var j=0; j<task_arr.length; j++) {
+  	// 			tmp_str = task_arr[j];
+  	// 			if(tmp_str.substring(0,1) == "#") {
+  	// 				var tmp_str = task_arr[j].slice(1);
+  	// 				tmp_str = "<code><a href='project.php?tag=" + tmp_str + "'>#" + tmp_str + "</a></code>"
+  	// 			}
+  	// 			tmp_str = tmp_str + " ";
+  	// 			task = task + " " + tmp_str;
+  	// 		}
+  	// 	}
+    // }
+    // else {
+    //   if(lists[i].task) {
+  	// 		var task_arr = lists[i].task.split(" ");
+  	// 		var tmp_str = "";
+  	// 		for(var j=0; j<task_arr.length; j++) {
+  	// 			tmp_str = task_arr[j];
+  	// 			if(tmp_str.substring(0,1) == "#") {
+  	// 				var tmp_str = task_arr[j].slice(1);
+  	// 				tmp_str = "<code><a href='project.php?tag=" + tmp_str + "'>#" + tmp_str + "</a></code>"
+  	// 			}
+  	// 			tmp_str = tmp_str + " ";
+  	// 			task = task + " " + tmp_str;
+  	// 		}
+  	// 	}
+    // }
 
-      if(lists[i].task) {
-  			var task_arr = lists[i].task.split(" ");
-  			var tmp_str = "";
-  			for(var j=0; j<task_arr.length; j++) {
-  				tmp_str = task_arr[j];
-  				if(tmp_str.substring(0,1) == "#") {
-  					var tmp_str = task_arr[j].slice(1);
-  					tmp_str = "<code><a href='project.php?tag=" + tmp_str + "'>#" + tmp_str + "</a></code>"
-  				}
-  				tmp_str = tmp_str + " ";
-  				task = task + " " + tmp_str;
-  			}
-  		}
-    }
-    else {
-      if(lists[i].task) {
-  			var task_arr = lists[i].task.split(" ");
-  			var tmp_str = "";
-  			for(var j=0; j<task_arr.length; j++) {
-  				tmp_str = task_arr[j];
-  				if(tmp_str.substring(0,1) == "#") {
-  					var tmp_str = task_arr[j].slice(1);
-  					tmp_str = "<code><a href='project.php?tag=" + tmp_str + "'>#" + tmp_str + "</a></code>"
-  				}
-  				tmp_str = tmp_str + " ";
-  				task = task + " " + tmp_str;
-  			}
-  		}
+		// var str = '<li><div class="checkbox"><label onClick="crossOut('+lists[i].to_do_id+')"><input type="checkbox" class="cb'+ lists[i].to_do_id +'"/><span class="sp'+ lists[i].to_do_id +'">'+ task +'</span></label></div></li>';
+
+    if(lists[i].task) {
+      var task_arr = lists[i].task.split(" ");
+      var tmp_str = "";
+      for(var j=0; j<task_arr.length; j++) {
+        tmp_str = task_arr[j];
+        if(tmp_str.substring(0,1) == "#") {
+          var tmp_str = task_arr[j].slice(1);
+          tmp_str = "<code><a href='project.php?tag=" + tmp_str + "'>#" + tmp_str + "</a></code>"
+        }
+        tmp_str = tmp_str + " ";
+        task = task + " " + tmp_str;
+      }
     }
 
-		var str = '<li><div class="checkbox"><label onClick="crossOut('+lists[i].to_do_id+')"><input type="checkbox" class="cb'+ lists[i].to_do_id +'"/><span class="sp'+ lists[i].to_do_id +'">'+ task +'</span></label></div></li>';
+    var str = '<div class="checkbox"><label onClick="crossOut(' + lists[i].to_do_id + ')"><input type="checkbox" value="" />'+ task +'</label></div>';
 
 		strHTML = strHTML + str;
 	}
-  strHTML += "</td></tr></tbody>";
+  // strHTML += "</td></tr></tbody>";
 	return strHTML;
 }
 
-function crossOut(to_do_id) {
-  console.log("=========\n"+"to do id = "+to_do_id);
-  var checked = $('.cb'+to_do_id).is(":checked");
-    if (checked) {
-      $('.sp'+to_do_id).css('textDecoration','line-through');
-      $('.cb'+to_do_id).prop('checked', true);
-      console.log(checked);
-    } else {
-      $('.sp'+to_do_id).css('textDecoration','none');
-      $('.cb'+to_do_id).prop('checked', false);
-      console.log(checked);
+function isChecked(allCB) {
+  for(var i=0; i< allCB.length; i++){
+    if(allCB[i].checked){
+      return true;
     }
+  }
+  return false;
+}
+
+function crossOut(id) {
+//   console.log("click");
+  var allCB = document.querySelectorAll("input");
+console.log(allCB);
+  // for(var i=0; i< allCB.length; i++){
+    // if(isChecked(allCB)){
+//       for(var j=0; j< allCB.length; j++){
+//         console.log("allBB["+j+"] = " + allCB[j].checked);
+//         allCB[j].checked=true;
+//
+//         $('.sp'+id).css('textDecoration','line-through');
+//         console.log("-----------");
+//       }
+//     }
+//     else {
+//       for(var j=0; j< allCB.length; j++){
+//           allCB[j].checked=false;
+//           $('.sp'+id).css('textDecoration','none');
+//       }
+//     }
+//   }
+//
+//   console.log("========");
 }
