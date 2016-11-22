@@ -32,12 +32,12 @@ $.ajax({
     if(result.todos.length > 0) {
       // var tableHTML = "<div class='table-responsive'><table class='table table-bordered'><thead><tr id='tag_text'>" + getTagInList(result.todos) + getToDoList(result.todos) + "</div>";
       var tableHTML = getToDoList(result.todos);
-
-      $(".checkboxlist").append(tableHTML);
+      console.log("tableHTML = "+tableHTML);
+      $("#checkboxlist").append(tableHTML);
     }
     else {
       var tableHTML = "You didn't add anything to the list.";
-      $(".checkboxlist").append(tableHTML);
+      $("#checkboxlist").append(tableHTML);
     }
 	},
 
@@ -64,6 +64,7 @@ function getTagInList(lists) {
 }
 
 function getToDoList(lists) {
+  console.log("getToDoList");
 	var strHTML = "<tbody><tr>";
   var strHTML = "";
   var previousTag = "";
@@ -75,12 +76,12 @@ function getToDoList(lists) {
 
     if (lists[i].tag_id != previousTag){
       // tag title is clickable
-      // previousTag = lists[i].tag_id;
-      // var tag = "<code><a href='project.php?tag=" + lists[i].tag_name + "'>#" + lists[i].tag_name + "</a></code>"
-      // strHTML += "<h5 style='margin-top: 10px;'>" + tag + "</h5>";
+      previousTag = lists[i].tag_id;
+      var tag = "<code><a href='project.php?tag=" + lists[i].tag_name + "'>#" + lists[i].tag_name + "</a></code>"
+      strHTML += "<h5 style='margin-top: 20px;'>" + tag + "</h5>";
 
       // tag title is unclickable
-      strHTML += "<h5 style='margin-top: 10px;'>" + lists[i].tag_name + "</h5>";
+      // strHTML += "<h5 style='margin-top: 10px;'>" + lists[i].tag_name + "</h5>";
 
       // if(lists[i].task) {
   		// 	var task_arr = lists[i].task.split(" ");
@@ -116,6 +117,7 @@ function getToDoList(lists) {
 
 		strHTML = strHTML + str;
 	}
+  console.log("strHTML="+strHTML);
   // strHTML += "</td></tr></tbody>";
 	return strHTML;
 }

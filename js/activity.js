@@ -104,14 +104,15 @@ $("#activity-input").keypress(function(event){
 		//post activity
 		if(!waitToPost) {
 			waitToPost = true;
-			var text = $("#activity-input").val().trim();
-			var firstTwo = text.substring(0, 1);
-			if(firstTwo == "+"){
-				addToDo(text.substring(1, text.length));
+			var text = $("#activity-input").val();
+			var firstTwo = text.substring(0, 2);
+			if(firstTwo == "+ "){
+				addToDo(text.substring(2, text.length));
 				var waitToPost = false;
 			}
 			else {
-				addActivity(text);
+				// var text = $("#activity-input").val().trim();
+				addActivity(text.trim());
 			}
 		}
   	return false;

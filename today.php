@@ -100,9 +100,9 @@ $_SESSION['timeout'] = time();
 
 			<div class="col-xs-12 col-sm-8 col-md-9">
 
-				<div class="todogroup">
+				<div id="todogroup">
 					<h1><strong>To do list</strong></h1>
-					<div class='checkboxlist'></div>
+					<div id='checkboxlist'></div>
 				</div>
 
 				<hr id="divider">

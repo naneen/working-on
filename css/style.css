@@ -97,6 +97,12 @@ body {
 	margin: 40px 0;
 }
 
-.checkboxlist {
+#checkboxlist {
 	padding: 0 20px;
+  max-height: 300px;
+  overflow-y: auto;
 }
+
+/*#todogroup {
+	 overflow-: auto;
+}*/
