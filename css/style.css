@@ -93,5 +93,10 @@ body {
 }
 
 #divider {
-	 border: 1.5px solid #eee;
+	border: 1.5px solid #eee;
+	margin: 40px 0;
+}
+
+.checkboxlist {
+	padding: 0 20px;
 }

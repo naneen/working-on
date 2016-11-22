@@ -33,11 +33,11 @@ $.ajax({
       // var tableHTML = "<div class='table-responsive'><table class='table table-bordered'><thead><tr id='tag_text'>" + getTagInList(result.todos) + getToDoList(result.todos) + "</div>";
       var tableHTML = getToDoList(result.todos);
 
-      $(".panel-body").append(tableHTML);
+      $(".checkboxlist").append(tableHTML);
     }
     else {
-      var tableHTML = "<div class='panel-body'>You didn't add anything to the list.</div>";
-      $(".panel").append(tableHTML);
+      var tableHTML = "You didn't add anything to the list.";
+      $(".checkboxlist").append(tableHTML);
     }
 	},
 
@@ -73,24 +73,29 @@ function getToDoList(lists) {
 		var owner_name = lists[i].owner_name;
     var task = " ";
 
-    // if (lists[i].tag_id != previousTag){
-    //   previousTag = lists[i].tag_id;
-    //   strHTML += "<td><ul class='list-unstyled'>";
-    //
-    //   if(lists[i].task) {
-  	// 		var task_arr = lists[i].task.split(" ");
-  	// 		var tmp_str = "";
-  	// 		for(var j=0; j<task_arr.length; j++) {
-  	// 			tmp_str = task_arr[j];
-  	// 			if(tmp_str.substring(0,1) == "#") {
-  	// 				var tmp_str = task_arr[j].slice(1);
-  	// 				tmp_str = "<code><a href='project.php?tag=" + tmp_str + "'>#" + tmp_str + "</a></code>"
-  	// 			}
-  	// 			tmp_str = tmp_str + " ";
-  	// 			task = task + " " + tmp_str;
-  	// 		}
-  	// 	}
-    // }
+    if (lists[i].tag_id != previousTag){
+      // tag title is clickable
+      previousTag = lists[i].tag_id;
+      var tag = "<code><a href='project.php?tag=" + lists[i].tag_name + "'>#" + lists[i].tag_name + "</a></code>"
+      strHTML += "<h5 style='margin-top: 10px;'>" + tag + "</h5>";
+
+      // tag title is unclickable
+      // strHTML += "<h5 style='margin-top: 10px;'>" + lists[i].tag_name + "</h5>";
+
+      // if(lists[i].task) {
+  		// 	var task_arr = lists[i].task.split(" ");
+  		// 	var tmp_str = "";
+  		// 	for(var j=0; j<task_arr.length; j++) {
+  		// 		tmp_str = task_arr[j];
+  		// 		if(tmp_str.substring(0,1) == "#") {
+  				// 	var tmp_str = task_arr[j].slice(1);
+  				// 	tmp_str = "<code><a href='project.php?tag=" + tmp_str + "'>#" + tmp_str + "</a></code>"
+  				// }
+  		// 		tmp_str = tmp_str + " ";
+  		// 		task = task + " " + tmp_str;
+  		// 	}
+  		// }
+    }
     // else {
     //   if(lists[i].task) {
   	// 		var task_arr = lists[i].task.split(" ");
@@ -107,23 +112,7 @@ function getToDoList(lists) {
   	// 	}
     // }
 
-		// var str = '<li><div class="checkbox"><label onClick="crossOut('+lists[i].to_do_id+')"><input type="checkbox" class="cb'+ lists[i].to_do_id +'"/><span class="sp'+ lists[i].to_do_id +'">'+ task +'</span></label></div></li>';
-
-    if(lists[i].task) {
-      var task_arr = lists[i].task.split(" ");
-      var tmp_str = "";
-      for(var j=0; j<task_arr.length; j++) {
-        tmp_str = task_arr[j];
-        if(tmp_str.substring(0,1) == "#") {
-          var tmp_str = task_arr[j].slice(1);
-          tmp_str = "<code><a href='project.php?tag=" + tmp_str + "'>#" + tmp_str + "</a></code>"
-        }
-        tmp_str = tmp_str + " ";
-        task = task + " " + tmp_str;
-      }
-    }
-
-    var str = '<div class="checkbox"><label onClick="crossOut(' + lists[i].to_do_id + ')"><input type="checkbox" value="" />'+ task +'</label></div>';
+    var str = '<div class="checkbox"><label onClick="crossOut(' + lists[i].to_do_id + ')"><input type="checkbox" value="" />'+ lists[i].task +'</label></div>';
 
 		strHTML = strHTML + str;
 	}
@@ -143,24 +132,24 @@ function isChecked(allCB) {
 function crossOut(id) {
 //   console.log("click");
   var allCB = document.querySelectorAll("input");
-console.log(allCB);
+  console.log(allCB);
   // for(var i=0; i< allCB.length; i++){
-    // if(isChecked(allCB)){
-//       for(var j=0; j< allCB.length; j++){
-//         console.log("allBB["+j+"] = " + allCB[j].checked);
-//         allCB[j].checked=true;
-//
-//         $('.sp'+id).css('textDecoration','line-through');
-//         console.log("-----------");
-//       }
-//     }
-//     else {
-//       for(var j=0; j< allCB.length; j++){
-//           allCB[j].checked=false;
-//           $('.sp'+id).css('textDecoration','none');
-//       }
-//     }
-//   }
-//
-//   console.log("========");
+  //   if(isChecked(allCB)){
+  //     for(var j=0; j< allCB.length; j++){
+  //       console.log("allBB["+j+"] = " + allCB[j].checked);
+  //       allCB[j].checked=true;
+  //
+  //       $('.sp'+id).css('textDecoration','line-through');
+  //       console.log("-----------");
+  //     }
+  //   }
+  //   else {
+  //     for(var j=0; j< allCB.length; j++){
+  //         allCB[j].checked=false;
+  //         $('.sp'+id).css('textDecoration','none');
+  //     }
+  //   }
+  // }
+  //
+  // console.log("========");
 }
