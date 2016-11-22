@@ -75,12 +75,12 @@ function getToDoList(lists) {
 
     if (lists[i].tag_id != previousTag){
       // tag title is clickable
-      previousTag = lists[i].tag_id;
-      var tag = "<code><a href='project.php?tag=" + lists[i].tag_name + "'>#" + lists[i].tag_name + "</a></code>"
-      strHTML += "<h5 style='margin-top: 10px;'>" + tag + "</h5>";
+      // previousTag = lists[i].tag_id;
+      // var tag = "<code><a href='project.php?tag=" + lists[i].tag_name + "'>#" + lists[i].tag_name + "</a></code>"
+      // strHTML += "<h5 style='margin-top: 10px;'>" + tag + "</h5>";
 
       // tag title is unclickable
-      // strHTML += "<h5 style='margin-top: 10px;'>" + lists[i].tag_name + "</h5>";
+      strHTML += "<h5 style='margin-top: 10px;'>" + lists[i].tag_name + "</h5>";
 
       // if(lists[i].task) {
   		// 	var task_arr = lists[i].task.split(" ");
