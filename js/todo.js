@@ -30,14 +30,12 @@ $.ajax({
 
 	success: function(result) {
     if(result.todos.length > 0) {
-      // var tableHTML = "<div class='table-responsive'><table class='table table-bordered'><thead><tr id='tag_text'>" + getTagInList(result.todos) + getToDoList(result.todos) + "</div>";
+      $('#todogroup').show();
       var tableHTML = getToDoList(result.todos);
-      console.log("tableHTML = "+tableHTML);
       $("#checkboxlist").append(tableHTML);
     }
     else {
-      var tableHTML = "You didn't add anything to the list.";
-      $("#checkboxlist").append(tableHTML);
+      console.log("You didn't add anything to the list.");
     }
 	},
 
@@ -64,65 +62,37 @@ function getTagInList(lists) {
 }
 
 function getToDoList(lists) {
-  console.log("getToDoList");
 	var strHTML = "<tbody><tr>";
   var strHTML = "";
   var previousTag = "";
+  console.log(lists);
 
 	for(var i=0; i<lists.length; i++) {
     var owner_id = lists[i].owner_id;
 		var owner_name = lists[i].owner_name;
     var task = " ";
+    var task_id = lists[i].to_do_id;
+    var tag_id = lists[i].tag_id;
+    var tag_name = lists[i].tag_name;
 
-    if (lists[i].tag_id != previousTag){
+    if (tag_id != previousTag){
       // tag title is clickable
-      previousTag = lists[i].tag_id;
-      var tag = "<code><a href='project.php?tag=" + lists[i].tag_name + "'>#" + lists[i].tag_name + "</a></code>"
-      strHTML += "<h5 style='margin-top: 20px;'>" + tag + "</h5>";
+      previousTag = tag_id;
+      var tag = "<code><a href='project.php?tag=" + tag_name + "'>#" + tag_name + "</a></code>"
+      strHTML += "<h5 class='tag_subtitle'>" + tag + "</h5>";
 
       // tag title is unclickable
-      // strHTML += "<h5 style='margin-top: 10px;'>" + lists[i].tag_name + "</h5>";
-
-      // if(lists[i].task) {
-  		// 	var task_arr = lists[i].task.split(" ");
-  		// 	var tmp_str = "";
-  		// 	for(var j=0; j<task_arr.length; j++) {
-  		// 		tmp_str = task_arr[j];
-  		// 		if(tmp_str.substring(0,1) == "#") {
-  				// 	var tmp_str = task_arr[j].slice(1);
-  				// 	tmp_str = "<code><a href='project.php?tag=" + tmp_str + "'>#" + tmp_str + "</a></code>"
-  				// }
-  		// 		tmp_str = tmp_str + " ";
-  		// 		task = task + " " + tmp_str;
-  		// 	}
-  		// }
+      // strHTML += "<h5 style='margin-top: 10px;'>" + tag_name + "</h5>";
     }
-    // else {
-    //   if(lists[i].task) {
-  	// 		var task_arr = lists[i].task.split(" ");
-  	// 		var tmp_str = "";
-  	// 		for(var j=0; j<task_arr.length; j++) {
-  	// 			tmp_str = task_arr[j];
-  	// 			if(tmp_str.substring(0,1) == "#") {
-  	// 				var tmp_str = task_arr[j].slice(1);
-  	// 				tmp_str = "<code><a href='project.php?tag=" + tmp_str + "'>#" + tmp_str + "</a></code>"
-  	// 			}
-  	// 			tmp_str = tmp_str + " ";
-  	// 			task = task + " " + tmp_str;
-  	// 		}
-  	// 	}
-    // }
 
-    var str = '<div class="checkbox"><label onClick="crossOut(' + lists[i].to_do_id + ')"><input type="checkbox" value="" />'+ lists[i].task +'</label></div>';
+    var str = '<div class="checkbox"><label><input type="checkbox" class="cb' + task_id + '" value="' + task_id + '" /><span class="sp' + task_id + '">'+ lists[i].task +'</span></label></div>';
 
 		strHTML = strHTML + str;
 	}
-  console.log("strHTML="+strHTML);
-  // strHTML += "</td></tr></tbody>";
 	return strHTML;
 }
 
-function isChecked(allCB) {
+function isChecked(allCB, id) {
   for(var i=0; i< allCB.length; i++){
     if(allCB[i].checked){
       return true;
@@ -131,27 +101,15 @@ function isChecked(allCB) {
   return false;
 }
 
-function crossOut(id) {
-//   console.log("click");
-  var allCB = document.querySelectorAll("input");
-  console.log(allCB);
-  // for(var i=0; i< allCB.length; i++){
-  //   if(isChecked(allCB)){
-  //     for(var j=0; j< allCB.length; j++){
-  //       console.log("allBB["+j+"] = " + allCB[j].checked);
-  //       allCB[j].checked=true;
-  //
-  //       $('.sp'+id).css('textDecoration','line-through');
-  //       console.log("-----------");
-  //     }
-  //   }
-  //   else {
-  //     for(var j=0; j< allCB.length; j++){
-  //         allCB[j].checked=false;
-  //         $('.sp'+id).css('textDecoration','none');
-  //     }
-  //   }
-  // }
-  //
-  // console.log("========");
-}
+$("#checkboxlist").on("click", "input[class^=cb]", function (td) {
+  var classname = td.currentTarget.className;
+  var id = "sp"+ classname.slice(2)
+  if ($(this).is(':checked')) {
+    $("."+classname).prop("checked", this.checked);
+    $("."+id).css("textDecoration","line-through");
+  }
+  else {
+    $("."+classname).prop("checked", false);
+    $("."+id).css("textDecoration","none");
+  }
+});
