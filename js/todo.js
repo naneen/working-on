@@ -23,26 +23,15 @@ function addToDo(todo){
   });
 }
 
-$.ajax({
-	type: 'POST',
-	url: 'php/get_to_do.php',
-	dataType: 'json',
-
-	success: function(result) {
-    if(result.todos.length > 0) {
-      $('#todogroup').show();
-      var tableHTML = getToDoList(result.todos);
-      $("#checkboxlist").append(tableHTML);
+function isCrossout(lists) {
+  for (var i = 0; i < lists.length; i++) {
+    if (lists[i].status == "crossout") {
+      var id = lists[i].to_do_id;
+      $(".cb"+id).prop("checked", true);
+      $(".sp"+id).css("textDecoration","line-through");
     }
-    else {
-      console.log("You didn't add anything to the list.");
-    }
-	},
-
-	error: function(result) {
-		console.log(result.responseText);
-	}
-});
+  }
+}
 
 function getTagInList(lists) {
   var tag_list = [];
@@ -85,12 +74,34 @@ function getToDoList(lists) {
       // strHTML += "<h5 style='margin-top: 10px;'>" + tag_name + "</h5>";
     }
 
-    var str = '<div class="checkbox"><label><input type="checkbox" class="cb' + task_id + '" value="' + task_id + '" /><span class="sp' + task_id + '">'+ lists[i].task +'</span></label></div>';
+    var str = '<div class="checkbox"><label><input type="checkbox" class="cb' + task_id + '" value="' + task_id + '"><span class="sp' + task_id + '">'+ lists[i].task +'</span></input></label></div>';
 
 		strHTML = strHTML + str;
 	}
 	return strHTML;
 }
+
+$.ajax({
+	type: 'POST',
+	url: 'php/get_to_do.php',
+	dataType: 'json',
+
+	success: function(result) {
+    if(result.todos.length > 0) {
+      $('#todogroup').show();
+      var tableHTML = getToDoList(result.todos);
+      $("#checkboxlist").append(tableHTML);
+      isCrossout(result.todos);
+    }
+    else {
+      console.log("You didn't add anything to the list.");
+    }
+	},
+
+	error: function(result) {
+		console.log(result.responseText);
+	}
+});
 
 function isChecked(allCB, id) {
   for(var i=0; i< allCB.length; i++){
@@ -105,7 +116,7 @@ $("#checkboxlist").on("click", "input[class^=cb]", function (td) {
   var classname = td.currentTarget.className;
   var id = classname.slice(2)
   if ($(this).is(':checked')) {
-    $("."+classname).prop("checked", this.checked);
+    $("."+classname).prop("checked", true);
     $(".sp"+id).css("textDecoration","line-through");
   }
   else {

@@ -23,12 +23,12 @@ $cmp = "";
 if($result->num_rows > 0) {
   $row = $result->fetch_assoc();
   if(strcmp($row["status"], "in queue")==0) {
-    $sql = "UPDATE `to_do` SET `status`='crossout' WHERE to_do.owner_id=$id AND to_do.id=$crossout_id";
+    $sql = "UPDATE `to_do` SET `status`='crossout', done_date = CURRENT_TIMESTAMP WHERE to_do.owner_id=$id AND to_do.id=$crossout_id";
     $conn->query($sql);
     $cmp = "statue = in queue";
   }
   elseif (strcmp($row["status"], "crossout")==0) {
-    $sql = "UPDATE `to_do` SET `status`='in queue' WHERE to_do.owner_id=$id AND to_do.id=$crossout_id";
+    $sql = "UPDATE `to_do` SET `status`='in queue', done_date = NULL WHERE to_do.owner_id=$id AND to_do.id=$crossout_id";
     $conn->query($sql);
     $cmp = "statue = crossout";
   }
