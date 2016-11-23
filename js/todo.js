@@ -133,22 +133,8 @@ function updateStatus (id) {
     url: 'php/update_td_status.php',
     dataType: 'json',
 
-    success: function(result){
-      // if(result.status == 1) {
-      //   document.location.reload(true);
-      // }
-      // else {
-      //   $("#input-group").addClass("has-error");
-      //   $("#help-block").show();
-      // }
-      // $("#activity-input").attr("disabled",false);
-      console.log(result);
-    },
-
     error: function(result) {
       alert(result.responseText);
-      // $("#activity-input").attr("disabled",false);
     }
   });
 }
-// UPDATE `to_do` SET `status`='in queue' WHERE to_do.id=6
