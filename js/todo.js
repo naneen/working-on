@@ -103,13 +103,41 @@ function isChecked(allCB, id) {
 
 $("#checkboxlist").on("click", "input[class^=cb]", function (td) {
   var classname = td.currentTarget.className;
-  var id = "sp"+ classname.slice(2)
+  var id = classname.slice(2)
   if ($(this).is(':checked')) {
     $("."+classname).prop("checked", this.checked);
-    $("."+id).css("textDecoration","line-through");
+    $(".sp"+id).css("textDecoration","line-through");
   }
   else {
     $("."+classname).prop("checked", false);
-    $("."+id).css("textDecoration","none");
+    $(".sp"+id).css("textDecoration","none");
   }
+  updateStatus(id);
 });
+
+function updateStatus (id) {
+  $.ajax({
+    type: 'POST',
+    data: { crossout_id: id },
+    url: 'php/update_td_status.php',
+    dataType: 'json',
+
+    success: function(result){
+      // if(result.status == 1) {
+      //   document.location.reload(true);
+      // }
+      // else {
+      //   $("#input-group").addClass("has-error");
+      //   $("#help-block").show();
+      // }
+      // $("#activity-input").attr("disabled",false);
+      console.log(result);
+    },
+
+    error: function(result) {
+      alert(result.responseText);
+      // $("#activity-input").attr("disabled",false);
+    }
+  });
+}
+// UPDATE `to_do` SET `status`='in queue' WHERE to_do.id=6

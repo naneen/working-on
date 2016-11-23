@@ -31,7 +31,7 @@ foreach ($text_arr as $value) {
 $tag_array = array_unique($tag_array);
 
 if(sizeof($tag_array) > 0) {
-  $sql = "INSERT INTO to_do (id, task, added_date, owner_id, status, due_date) VALUES (NULL, '". $text ."', CURRENT_TIMESTAMP, '". $id ."', 1, NULL)";
+  $sql = "INSERT INTO to_do (id, task, added_date, owner_id, status, due_date) VALUES (NULL, '". $text ."', CURRENT_TIMESTAMP, '". $id ."', 'in queue', NULL)";
   $result = $conn->query($sql);
 
 	foreach ($tag_array as $value) {
