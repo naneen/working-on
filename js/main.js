@@ -157,8 +157,9 @@ function pokeUser(id, name) {
 }
 
 function getActivityList(activities, userFirst) {
-	var strHTML = ""
-
+	var strHTML = "";
+  var ownHTML = "";
+  console.log(activities);
 	for(var i=0; i<activities.length; i++) {
 		var owner_id = activities[i].owner_id;
 		var owner_name = activities[i].owner_name;
@@ -168,6 +169,7 @@ function getActivityList(activities, userFirst) {
 		if(activities[i].status_text) {
 			var status_text_arr = activities[i].status_text.split(" ");
 			var tmp_str = "";
+
 			for(var j=0; j<status_text_arr.length; j++) {
 				tmp_str = status_text_arr[j];
 				if(tmp_str.substring(0,1) == "#") {
@@ -177,6 +179,7 @@ function getActivityList(activities, userFirst) {
 				tmp_str = tmp_str + " ";
 				status_text = status_text + " " + tmp_str;
 			}
+
 			if(activities[i].online == 1)
 				if (owner_name == "You")
 					status_text = " are working on " + status_text;
@@ -206,35 +209,64 @@ function getActivityList(activities, userFirst) {
 		var startTime = activities[i].start_time;
 		var updatedAt = activities[i].updated_at;
 		var crT = new Date(activities[i].current_time);
-		if(updatedAt) {
-			var date = new Date(updatedAt);
-			str = str + '<br><small class="text-muted"style="line-height:10px;" title="' + formatDateFull(date) + '">' + formatDateShort(date, crT) + '</small>';
-		}else if(startTime) {
-			var date = new Date(startTime);
-			str = str + '<br><small class="text-muted"style="line-height:10px;" title="' + formatDateFull(date) + '">' + formatDateShort(date, crT) + '</small>';
-		}
 
-		var endTime = activities[i].end_time;
-		if(endTime) {
-			var stT = new Date(startTime);
-			var edT = new Date(activities[i].end_time);
-			str = str + '<small class="text-muted"style="line-height:10px;"> &mdash; total ' + getDuration(stT, edT) + '</small>';
-		}
+		// if(updatedAt) {
+		// 	var date = new Date(updatedAt);
+		// 	str = str + '<br><small class="text-muted"style="line-height:10px;" title="' + formatDateFull(date) + '">' + formatDateShort(date, crT) + '</small>';
+		// }
+    // else if(startTime) {
+		// 	var date = new Date(startTime);
+		// 	str = str + '<br><small class="text-muted"style="line-height:10px;" title="' + formatDateFull(date) + '">' + formatDateShort(date, crT) + '</small>';
+		// }
+    //
+		// var endTime = activities[i].end_time;
+		// if(endTime) {
+		// 	var stT = new Date(startTime);
+		// 	var edT = new Date(activities[i].end_time);
+		// 	str = str + '<small class="text-muted"style="line-height:10px;"> &mdash; total ' + getDuration(stT, edT) + '</small>';
+		// }
+
+    if(activities[i].owner_name != "You" && activities[i].status_text!= null){
+      if(updatedAt) {
+  			var date = new Date(updatedAt);
+  			str = str + '<br><small class="text-muted"style="line-height:10px;" title="' + formatDateFull(date) + '">' + formatDateShort(date, crT) + '</small>';
+  		}
+      else if(startTime) {
+  			var date = new Date(startTime);
+  			str = str + '<br><small class="text-muted"style="line-height:10px;" title="' + formatDateFull(date) + '">' + formatDateShort(date, crT) + '</small>';
+  		}
+
+  		var endTime = activities[i].end_time;
+  		if(endTime) {
+  			var stT = new Date(startTime);
+  			var edT = new Date(activities[i].end_time);
+  			str = str + '<small class="text-muted"style="line-height:10px;"> &mdash; total ' + getDuration(stT, edT) + '</small>';
+  		}
+    }
 
 		str = str + '</p></div>';
 
 		if(activities[i].editable && activities[i].status_text != null) {
 			str = str + '<div class="media-body media-middle" style="width:100px"><button onClick="endActivity(' + activities[i].activity_id + ')" type="button" class="btn btn-sm btn-success btn-block"><span class="glyphicon glyphicon-check" aria-hidden="true"></span> Done</button><button onClick="deleteActivity(' + activities[i].activity_id + ')" type="button" class="btn btn-sm btn-danger btn-block"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete</button></div>';
-		}else if(activities[i].status_text == null) {
-			str = str + '<div class="media-body media-middle" style="width:100px"><button onClick="pokeUser(' + owner_id + ',\'' + owner_name + '\')" type="button" class="btn btn-sm btn-primary btn-block"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Poke</button></div>';
+		}
+    else if(activities[i].status_text == null) {
+      if(activities[i].owner_name != "You") {
+  			str = str + '<div class="media-body media-middle" style="width:100px"><button onClick="pokeUser(' + owner_id + ',\'' + owner_name + '\')" type="button" class="btn btn-sm btn-primary btn-block"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Poke</button></div>';
+      }
 		}
 
 		str = str + '</div></div></div></div><hr>';
 		if(userFirst && activities[i].owner_name == "You") {
-			strHTML = str + strHTML;
+      returnOwnActivity(str);
+			// strHTML = str + strHTML;
 		} else {
 			strHTML = strHTML + str;
 		}
 	}
 	return strHTML;
+}
+
+function returnOwnActivity(str) {
+  $("#ownActivity").html(str);
+  console.log(str);
 }

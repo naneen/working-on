@@ -98,7 +98,7 @@ body {
 }
 
 #checkboxlist {
-	padding: 0 20px;
+	padding: 0 0 0 50px;
   max-height: 300px;
   overflow-y: auto;
 }

@@ -6,7 +6,7 @@ $username = "root";
 $password = "root";
 $dbname = "newDB";
 
-$crossout_id = $_POST["crossout_id"];
+$activity_id = $_POST["activity_id"];
 $id = $_SESSION['ez_wko_id'];
 
 // Create connection
@@ -16,18 +16,44 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT `id`, `status`, `done_date` FROM `to_do` WHERE to_do.owner_id=$id AND to_do.id=$crossout_id";
+$sql = "SELECT `id`, `status`, `done_date` FROM `to_do` WHERE to_do.owner_id=$id AND to_do.id=$activity_id";
 $result = $conn->query($sql);
 
-if($result->num_rows > 0) {
-  $row = $result->fetch_assoc();
-  if(strcmp($row["status"], "in queue")==0) {
-    $sql = "UPDATE `to_do` SET `status`='crossout', done_date = CURRENT_TIMESTAMP WHERE to_do.owner_id=$id AND to_do.id=$crossout_id";
-    $conn->query($sql);
+$cmp = "";
+
+if($activity_id > 0){
+  if($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    if(strcmp($row["status"], "in queue")==0) {
+      $sql = "UPDATE `to_do` SET `status`='crossout', done_date = CURRENT_TIMESTAMP WHERE to_do.owner_id=$id AND to_do.id=$activity_id";
+      $conn->query($sql);
+      $cmp = "statue = crossout";
+    }
+    else {
+      $sql = "UPDATE `to_do` SET `status`='in queue', done_date = NULL WHERE to_do.owner_id=$id AND to_do.id=$activity_id";
+      $conn->query($sql);
+      $cmp = "statue = in queue";
+    }
   }
-  elseif (strcmp($row["status"], "crossout")==0) {
-    $sql = "UPDATE `to_do` SET `status`='in queue', done_date = NULL WHERE to_do.owner_id=$id AND to_do.id=$crossout_id";
-    $conn->query($sql);
+  $todos = array();
+  if ($result->num_rows > 0) {
+  	while($row = $result->fetch_assoc()) {
+
+  		$tmp_arr = array(
+  				'to_do_id' => $row["id"],
+  				'status' => $row["status"],
+  				'done_date' => $row["done_date"]);
+
+  		array_push($todos, $tmp_arr);
+  	}
   }
+  $response = array("result"=>1,"todos"=>$todos);
 }
+else {
+  $sql = "UPDATE `to_do` SET `status`='removed' WHERE to_do.owner_id=$id AND to_do.done_date < CURDATE()";
+  $conn->query($sql);
+  $cmp = $activity_id;
+}
+// echo json_encode($response);
+echo json_encode($cmp);
 ?>

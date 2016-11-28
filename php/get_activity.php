@@ -40,7 +40,7 @@ if ($result->num_rows > 0) {
 }
 
 //People who haven't yet gone online today
-$sql = "SELECT p.id owner_id, p.firstname, NULL status_text, p.last_login start_time, NULL end_time, p.last_login updated_at, CURRENT_TIMESTAMP AS 'time', 0 online FROM person p where p.status > 0 AND p.last_login < CURRENT_DATE";
+$sql = "SELECT p.id owner_id, p.firstname, NULL status_text, p.last_login start_time, NULL end_time, p.last_login updated_at, CURRENT_TIMESTAMP AS 'time', 0 online FROM person p where p.status > 0  AND p.last_login < CURRENT_DATE";
 
 $result = $conn->query($sql);
 

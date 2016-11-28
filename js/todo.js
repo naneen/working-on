@@ -54,7 +54,8 @@ function getToDoList(lists) {
 	var strHTML = "<tbody><tr>";
   var strHTML = "";
   var previousTag = "";
-  console.log(lists);
+
+  updateStatus(-1);
 
 	for(var i=0; i<lists.length; i++) {
     var owner_id = lists[i].owner_id;
@@ -129,9 +130,13 @@ $("#checkboxlist").on("click", "input[class^=cb]", function (td) {
 function updateStatus (id) {
   $.ajax({
     type: 'POST',
-    data: { crossout_id: id },
+    data: { activity_id: id },
     url: 'php/update_td_status.php',
     dataType: 'json',
+
+    success: function(result){
+      console.log(result);
+    },
 
     error: function(result) {
       alert(result.responseText);
