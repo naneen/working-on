@@ -50,6 +50,38 @@ function getTagInList(lists) {
   return theadHTML;
 }
 
+// function getToDoList(lists) {
+// 	var strHTML = "<tbody><tr>";
+//   var strHTML = "";
+//   var previousTag = "";
+//
+//   updateStatus(-1);
+//
+// 	for(var i=0; i<lists.length; i++) {
+//     var owner_id = lists[i].owner_id;
+// 		var owner_name = lists[i].owner_name;
+//     var task = " ";
+//     var task_id = lists[i].to_do_id;
+//     var tag_id = lists[i].tag_id;
+//     var tag_name = lists[i].tag_name;
+//
+//     if (tag_id != previousTag){
+//       // tag title is clickable
+//       previousTag = tag_id;
+//       var tag = "<code><a href='project.php?tag=" + tag_name + "'>#" + tag_name + "</a></code>"
+//       strHTML += "<h5 class='tag_subtitle'>" + tag + "</h5>";
+//
+//       // tag title is unclickable
+//       // strHTML += "<h5 style='margin-top: 10px;'>" + tag_name + "</h5>";
+//     }
+//
+//     var str = '<div class="checkbox"><label><input type="checkbox" class="cb' + task_id + '" value="' + task_id + '"><span class="sp' + task_id + '">'+ lists[i].task +'</span></input></label></div>';
+//
+// 		strHTML = strHTML + str;
+// 	}
+// 	return strHTML;
+// }
+
 function getToDoList(lists) {
 	var strHTML = "<tbody><tr>";
   var strHTML = "";

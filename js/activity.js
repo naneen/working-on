@@ -105,13 +105,14 @@ $("#activity-input").keypress(function(event){
 		if(!waitToPost) {
 			waitToPost = true;
 			var text = $("#activity-input").val();
-			var firstTwo = text.substring(0, 2);
-			if(firstTwo == "+ "){
-				addToDo(text.substring(2, text.length));
+			var firstChar = text.substring(0, 1);
+			if(firstChar == "+"){
+				addToDo(text.substring(1, text.length));
+				console.log(text.substring(1, text.length));
 				var waitToPost = false;
 			}
 			else {
-				// var text = $("#activity-input").val().trim();
+				var text = $("#activity-input").val().trim();
 				addActivity(text.trim());
 			}
 		}
