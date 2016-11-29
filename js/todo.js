@@ -95,7 +95,7 @@ $.ajax({
       isCrossout(result.todos);
     }
     else {
-      console.log("You didn't add anything to the list.");
+      // console.log("You didn't add anything to the list.");
     }
 	},
 
@@ -135,7 +135,7 @@ function updateStatus (id) {
     dataType: 'json',
 
     success: function(result){
-      console.log(result);
+      // console.log(result);
     },
 
     error: function(result) {

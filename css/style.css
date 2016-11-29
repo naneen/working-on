@@ -94,15 +94,15 @@ body {
 
 #divider {
 	border: 1.5px solid #eee;
-	margin: 40px 0;
+	margin: 20px 0;
 }
 
 #checkboxlist {
-	padding: 0 0 0 50px;
+	padding: 0 0 0 75px;
   max-height: 300px;
   overflow-y: auto;
 }
 
 .tag_subtitle {
-	margin-top: 20px;
+	margin-top: 15px;
 }

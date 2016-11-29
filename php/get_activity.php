@@ -40,7 +40,20 @@ if ($result->num_rows > 0) {
 }
 
 //People who haven't yet gone online today
-$sql = "SELECT p.id owner_id, p.firstname, NULL status_text, p.last_login start_time, NULL end_time, p.last_login updated_at, CURRENT_TIMESTAMP AS 'time', 0 online FROM person p where p.status > 0  AND p.last_login < CURRENT_DATE";
+$sql = "SELECT p.id owner_id, p.firstname, NULL status_text, p.last_login start_time, NULL end_time, act.start_time updated_at, CURRENT_TIMESTAMP AS 'time', 0 online
+FROM person p
+INNER JOIN(
+    SELECT a.id, a.start_time, a.end_time, a.status_text, a.owner_id, a.delete
+    FROM activity a
+    INNER JOIN
+        (SELECT MAX(id) as id
+         FROM activity
+         GROUP BY owner_id) last_updates
+    ON last_updates.id = a.id
+    WHERE a.owner_id > 0 AND a.start_time < CURDATE() OR a.delete > 0
+    ORDER BY a.owner_id ASC) act
+WHERE act.owner_id = p.id AND p.status > 0";
+// $sql = "SELECT p.id owner_id, p.firstname, NULL status_text, p.last_login start_time, NULL end_time, p.last_login updated_at, CURRENT_TIMESTAMP AS 'time', 0 online FROM person p where p.status > 0  AND p.last_login < CURRENT_DATE";
 
 $result = $conn->query($sql);
 

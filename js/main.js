@@ -159,7 +159,6 @@ function pokeUser(id, name) {
 function getActivityList(activities, userFirst) {
 	var strHTML = "";
   var ownHTML = "";
-  console.log(activities);
 	for(var i=0; i<activities.length; i++) {
 		var owner_id = activities[i].owner_id;
 		var owner_name = activities[i].owner_name;
@@ -181,13 +180,15 @@ function getActivityList(activities, userFirst) {
 			}
 
 			if(activities[i].online == 1)
-				if (owner_name == "You")
+				if (owner_name == "You") {
 					status_text = " are working on " + status_text;
+        }
 				else
 					status_text = " is working on " + status_text;
 			else if (activities[i].online == 2) {
-				if (owner_name == "You")
+				if (owner_name == "You"){
 					status_text = " have done " + status_text;
+        }
 				else
 					status_text = " has done " + status_text;
 			}
@@ -209,22 +210,6 @@ function getActivityList(activities, userFirst) {
 		var startTime = activities[i].start_time;
 		var updatedAt = activities[i].updated_at;
 		var crT = new Date(activities[i].current_time);
-
-		// if(updatedAt) {
-		// 	var date = new Date(updatedAt);
-		// 	str = str + '<br><small class="text-muted"style="line-height:10px;" title="' + formatDateFull(date) + '">' + formatDateShort(date, crT) + '</small>';
-		// }
-    // else if(startTime) {
-		// 	var date = new Date(startTime);
-		// 	str = str + '<br><small class="text-muted"style="line-height:10px;" title="' + formatDateFull(date) + '">' + formatDateShort(date, crT) + '</small>';
-		// }
-    //
-		// var endTime = activities[i].end_time;
-		// if(endTime) {
-		// 	var stT = new Date(startTime);
-		// 	var edT = new Date(activities[i].end_time);
-		// 	str = str + '<small class="text-muted"style="line-height:10px;"> &mdash; total ' + getDuration(stT, edT) + '</small>';
-		// }
 
     if(activities[i].owner_name != "You" && activities[i].status_text!= null){
       if(updatedAt) {
@@ -255,11 +240,12 @@ function getActivityList(activities, userFirst) {
       }
 		}
 
-		str = str + '</div></div></div></div><hr>';
+		str = str + '</div></div></div></div>';
 		if(userFirst && activities[i].owner_name == "You") {
       returnOwnActivity(str);
 			// strHTML = str + strHTML;
 		} else {
+      str = str + '<hr>';
 			strHTML = strHTML + str;
 		}
 	}
@@ -268,5 +254,17 @@ function getActivityList(activities, userFirst) {
 
 function returnOwnActivity(str) {
   $("#ownActivity").html(str);
-  console.log(str);
 }
+
+
+
+// SELECT p.id, p.firstname, p.status, a.status_text, a.start_time
+// FROM person p INNER JOIN (
+// 	SELECT a.ID, a.status_text, a.owner_id, a.start_time
+// 	FROM   activity a
+// 	WHERE(
+//      SELECT COUNT(*)
+//      FROM   activity b
+//      where  b.owner_id = a.owner_id and b.start_time >= a.start_time
+//   	) <= 1) as a
+// WHERE p.id=a.owner_id AND p.status>0
