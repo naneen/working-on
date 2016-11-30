@@ -106,3 +106,15 @@ body {
 .tag_subtitle {
 	margin-top: 15px;
 }
+
+.checkbox {
+	padding: 0 0 0 17px;
+}
+
+@media (max-width: 768px){
+	#checkboxlist {
+		padding: 0 0 0 20px;
+	  max-height: 300px;
+	  overflow-y: auto;
+	}
+}
