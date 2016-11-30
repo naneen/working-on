@@ -37,7 +37,9 @@ $_SESSION['timeout'] = time();
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="today.php"><img alt="Brand" src="images/logo.png" height="100%"></a>
+				<a class="navbar-brand" href="today.php">
+					<img id="logo" alt="Brand" src="images/logo.png">
+				</a>
 			</div>
 			<div class="collapse navbar-collapse" id="navbar-1">
 				<ul class="nav navbar-nav">

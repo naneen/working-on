@@ -243,7 +243,6 @@ function getActivityList(activities, userFirst) {
 		str = str + '</div></div></div></div>';
 		if(userFirst && activities[i].owner_name == "You") {
       returnOwnActivity(str);
-			// strHTML = str + strHTML;
 		} else {
       str = str + '<hr>';
 			strHTML = strHTML + str;
@@ -255,16 +254,3 @@ function getActivityList(activities, userFirst) {
 function returnOwnActivity(str) {
   $("#ownActivity").html(str);
 }
-
-
-
-// SELECT p.id, p.firstname, p.status, a.status_text, a.start_time
-// FROM person p INNER JOIN (
-// 	SELECT a.ID, a.status_text, a.owner_id, a.start_time
-// 	FROM   activity a
-// 	WHERE(
-//      SELECT COUNT(*)
-//      FROM   activity b
-//      where  b.owner_id = a.owner_id and b.start_time >= a.start_time
-//   	) <= 1) as a
-// WHERE p.id=a.owner_id AND p.status>0
