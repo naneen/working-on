@@ -45,7 +45,6 @@ $.ajax({
 	dataType: 'json',
 
 	success: function(result){
-		// console.log(result);
 		$("#activity").html(getActivityList(result.activities, true));
 	},
 
