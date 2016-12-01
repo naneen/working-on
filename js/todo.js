@@ -66,16 +66,12 @@ function getToDoList(lists) {
     var tag_name = lists[i].tag_name;
 
     if (tag_id != previousTag){
-      // tag title is clickable
       previousTag = tag_id;
       var tag = "<code><a href='project.php?tag=" + tag_name + "'>#" + tag_name + "</a></code>"
       strHTML += "<h5 class='tag_subtitle'>" + tag + "</h5>";
     }
 
     var str = '<div class="checkbox"><label><input type="checkbox" class="cb' + task_id + '" value="' + task_id + '"><span class="sp' + task_id + '">'+ lists[i].task +'</span></input></label></div>';
-
-    // var str = '<div class="checkbox"><label><input type="checkbox" class="cb' + task_id + '" value="' + task_id + '"><span class="sp' + task_id + '"><span style="color: rgba(0, 0, 0, 0.2);">+ </span>'+ lists[i].task +'</span></input></label></div>';
-
 		strHTML = strHTML + str;
 	}
 	return strHTML;

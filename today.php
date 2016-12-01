@@ -105,8 +105,9 @@ $_SESSION['timeout'] = time();
 
 				<div id="todogroup" style="display:none">
 					<div id='checkboxlist'></div>
-					<hr id="divider">
 				</div>
+
+				<hr id="divider">
 
 				<div id="activity"></div>
 			</div>
