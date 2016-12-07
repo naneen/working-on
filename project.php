@@ -79,7 +79,7 @@ if(!isset($_SESSION['ez_wko_id']) || $_SESSION['ez_wko_id'] == -1) {
 
 
 	<script type="text/javascript">
-		var currentTag = <?php 
+		var currentTag = <?php
 		if(isset($_GET["tag"]))
 			echo "'" . $_GET["tag"] . "'";
 		else

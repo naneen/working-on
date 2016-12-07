@@ -71,7 +71,7 @@ function getToDoList(lists) {
       strHTML += "<h5 class='tag_subtitle'>" + tag + "</h5>";
     }
 
-    var str = '<div class="checkbox"><label><input type="checkbox" class="cb' + task_id + '" value="' + task_id + '"><span class="sp' + task_id + '">'+ lists[i].task +'</span></input></label></div>';
+    var str = '<div class="checkbox"><label style="word-wrap:break-word"><input type="checkbox" class="cb' + task_id + '" value="' + task_id + '"><span class="sp' + task_id + '">'+ lists[i].task +'</span></input></label></div>';
 		strHTML = strHTML + str;
 	}
 	return strHTML;
@@ -114,13 +114,10 @@ $("#checkboxlist").on("click", "input[class^=cb]", function (td) {
   if ($(this).is(':checked')) {
     $("."+classname).prop("checked", true);
     $(".sp"+id).css("textDecoration","line-through");
-    var status = $(".sp"+id).text();
-    $('#activity-input').val(status);
   }
   else {
     $("."+classname).prop("checked", false);
     $(".sp"+id).css("textDecoration","none");
-    $('#activity-input').val("");
   }
   updateStatus(id);
 });
@@ -133,7 +130,7 @@ function updateStatus (id) {
     dataType: 'json',
 
     success: function(result){
-      // console.log(result);
+      console.log(result);
     },
 
     error: function(result) {

@@ -4,6 +4,7 @@ $servername = "localhost:8889";
 $username = "root";
 $password = "root";
 $dbname = "newDB";
+
 $id = $_POST['id'];
 
 // Create connection

@@ -211,7 +211,7 @@ function getActivityList(activities, userFirst) {
 		var updatedAt = activities[i].updated_at;
 		var crT = new Date(activities[i].current_time);
 
-    if(activities[i].owner_name != "You" && activities[i].status_text!= null){
+    if(activities[i].status_text!= null){
       if(updatedAt) {
   			var date = new Date(updatedAt);
   			str = str + '<br><small class="text-muted"style="line-height:10px;" title="' + formatDateFull(date) + '">' + formatDateShort(date, crT) + '</small>';

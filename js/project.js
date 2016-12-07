@@ -50,6 +50,7 @@ $.ajax({
 	dataType: 'json',
 
 	success: function(result){
+		console.log(result);
 		if(result.activities.length > 0) {
 			$("#activity").html(getActivityList(result.activities, false));
 			var sumDuration = 0;

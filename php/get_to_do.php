@@ -19,7 +19,7 @@ FROM to_do td INNER JOIN (
 	SELECT d.to_do_id, d.tag_id, g.tag_name
 	FROM to_do_tag d, tag g
 	WHERE g.id=d.tag_id) as t
-WHERE td.id=t.to_do_id AND td.owner_id=$id AND (td.done_date >= CURDATE() OR td.done_date IS NULL)
+WHERE td.id=t.to_do_id AND td.owner_id=$id AND td.status not like '%removed%'
 ORDER BY t.tag_id DESC, to_do_id ASC";
 
 $conn->query('SET SQL_BIG_SELECTS=1');

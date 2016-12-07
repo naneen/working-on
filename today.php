@@ -14,7 +14,6 @@ if(isset($_SESSION['timeout']) ) {
         { session_destroy(); header("Location: logout.php"); }
 }
 $_SESSION['timeout'] = time();
-
 ?>
 <!DOCTYPE html>
 <head>
@@ -43,10 +42,10 @@ $_SESSION['timeout'] = time();
 			</div>
 			<div class="collapse navbar-collapse" id="navbar-1">
 				<ul class="nav navbar-nav">
-				<li class="active"><a href="today.php">Today <span class="sr-only">(current)</span></a></li>
-				<li><a href="project.php">Project</a></li>
-				<li><a href="history.php">History</a></li>
-				<li><a href="lesson.php">Lesson</a></li>
+					<li class="active"><a href="today.php">Today <span class="sr-only">(current)</span></a></li>
+					<li><a href="project.php">Project</a></li>
+					<li><a href="history.php">History</a></li>
+					<li><a href="lesson.php">Lesson</a></li>
 				</ul>
 				<a href="logout.php" type="button" class="btn btn-danger navbar-btn navbar-right"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Logout</a>
 			</div>
@@ -84,7 +83,7 @@ $_SESSION['timeout'] = time();
 			</div>
 			<div class="row">
 				<div id="input-group" class="form-group">
-					<div class="col-xs-12 col-md-12"><textarea class="form-control input-lg" id="activity-input" type="text" placeholder="Doing something with #project-name (start with '+' to add to do list)" rows="1" style="resize: none;"></textarea></div>
+					<div class="col-xs-12 col-md-12"><textarea class="form-control input-lg" id="activity-input" type="text" placeholder="Doing something with #project-name" rows="1" style="resize: none;"></textarea></div>
 					<span id="help-block" class="help-block" style="display:none; padding-left:20px">You must include at least 1 tag.</span>
 				</div>
 			</div>

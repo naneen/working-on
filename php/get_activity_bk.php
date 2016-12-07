@@ -38,5 +38,5 @@ if ($result->num_rows > 0) {
 
 
 $response = array("result"=>1,"activities"=>$activities);
-echo json_encode($response);
+echo json_encode($row["start_time"]);
 ?>

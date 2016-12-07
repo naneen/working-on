@@ -106,12 +106,12 @@ $("#activity-input").keypress(function(event){
 			var text = $("#activity-input").val();
 			var firstChar = text.substring(0, 1);
 			if(firstChar == "+"){
-				addToDo(text.substring(1, text.length));
+				addToDo(text.substring(1, text.length).trim());
 				console.log(text.substring(1, text.length));
 				var waitToPost = false;
 			}
 			else {
-				var text = $("#activity-input").val().trim();
+				var text = $("#activity-input").val();
 				addActivity(text.trim());
 			}
 		}

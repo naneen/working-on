@@ -46,7 +46,7 @@ WHERE id NOT IN (
 select a.owner_id
 from activity a
 where a.start_time >= CURDATE() AND a.delete=0
-GROUP by a.owner_id)";
+GROUP by a.owner_id) AND p.status > 0";
 
 // $sql = "SELECT p.id owner_id, p.firstname, NULL status_text, p.last_login start_time, NULL end_time, p.last_login updated_at, CURRENT_TIMESTAMP AS 'time', 0 online FROM person p where p.status > 0  AND p.last_login < CURRENT_DATE";
 
@@ -63,7 +63,7 @@ if ($result->num_rows > 0) {
 				'end_time' => ($row["end_time"] == NULL)? NULL: date_format(date_create($row["end_time"]),"Y/m/d H:i:s"),
 				'updated_at' => ($row["updated_at"] == NULL)? NULL: date_format(date_create($row["updated_at"]),"Y/m/d H:i:s"),
 				'current_time' => ($row["time"] == NULL)? NULL: date_format(date_create($row["time"]),"Y/m/d H:i:s"),
-				'online' => $row["online"],
+				'online' => $row["online"]
 			);
 
 		array_push($activities, $tmp_arr);
