@@ -32,6 +32,13 @@ $.ajax({
 			trigger: "#",
 			allowDuplicates: false
 		});
+
+		$('#todo-input').triggeredAutocomplete({
+			hidden: '#hidden_inputbox',
+			source: tagsList,
+			trigger: "#",
+			allowDuplicates: false
+		});
 	},
 
 	error: function() {
