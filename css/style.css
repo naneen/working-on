@@ -79,8 +79,12 @@ body {
 	margin: 20px 0;
 }
 
-#checkboxlist {
+#todogroup {
 	padding: 0 0 0 75px;
+}
+
+#checkboxlist {
+	/*padding: 0 0 0 75px;*/
   max-height: 300px;
   overflow-y: auto;
 }
@@ -94,6 +98,10 @@ body {
 }
 
 @media (max-width: 768px){
+	#todogroup {
+		padding: 0;
+	}
+
 	#checkboxlist {
 		padding: 0 0 0 10px;
 	}
@@ -115,6 +123,10 @@ body {
 	}
 }
 
+#todo-input {
+	margin-top: 5px;
+}
+
 .navbar-brand > img {
   height: 100%;
 	padding: 15px 0;
@@ -122,9 +134,9 @@ body {
 }
 
 .navbar-fixed-top .navbar-brand {
-    height: 50px;
-    padding: 0 15px;
-		float: left;
-    font-size: 18px;
-    line-height: 20px;
+  height: 50px;
+  padding: 0 15px;
+	float: left;
+  font-size: 18px;
+  line-height: 20px;
 }

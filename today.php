@@ -103,7 +103,12 @@ $_SESSION['timeout'] = time();
 				<div id="ownActivity"></div>
 
 				<div id="todogroup" style="display:none">
-					<div id='checkboxlist'></div>
+					<div id="checkboxlist"></div>
+
+					<div id="todo-textarea" class="form-group">
+						<textarea class="form-control input ui-autocomplete-input" id="todo-input" type="text" placeholder="Doing something with #project-name" rows="1" style="resize: none;"></textarea>
+						<span id="td-error" class="help-block" style="display:none;">You must include at least 1 tag.</span>
+					</div>
 				</div>
 
 				<hr id="divider">

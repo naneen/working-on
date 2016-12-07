@@ -106,8 +106,7 @@ $("#activity-input").keypress(function(event){
 			var text = $("#activity-input").val();
 			var firstChar = text.substring(0, 1);
 			if(firstChar == "+"){
-				addToDo(text.substring(1, text.length).trim());
-				console.log(text.substring(1, text.length));
+				addToDo(text.substring(1, text.length).trim(), "head");
 				var waitToPost = false;
 			}
 			else {

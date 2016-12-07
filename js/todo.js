@@ -1,4 +1,4 @@
-function addToDo(todo){
+function addToDo(todo, place){
   $.ajax({
     type: 'POST',
     data: { status_text: todo },
@@ -10,8 +10,14 @@ function addToDo(todo){
         document.location.reload(true);
       }
       else {
-        $("#input-group").addClass("has-error");
-        $("#help-block").show();
+        if(place == "head") {
+          $("#input-group").addClass("has-error");
+          $("#help-block").show();
+        }
+        else if(place == "underlist") {
+          $("#todo-textarea").addClass("has-error");
+          $("#td-error").show();
+        }
       }
       $("#activity-input").attr("disabled",false);
     },
@@ -130,11 +136,30 @@ function updateStatus (id) {
     dataType: 'json',
 
     success: function(result){
-      console.log(result);
+      // console.log(result);
     },
 
     error: function(result) {
       alert(result.responseText);
     }
-  });
-}
+  })
+};
+
+$("#todo-input").keypress(function(event){
+	if (event.keyCode != 13) { //enter key
+		return;
+	}
+	else {
+		var text = $("#todo-input").val().trim();
+		var firstChar = text.substring(0, 1);
+		if(firstChar == "+"){
+			addToDo(text.substring(1, text.length).trim(), "underlist");
+			console.log(text.substring(1, text.length));
+		}
+		else {
+      addToDo(text, "underlist");
+			console.log(text);
+		}
+    return false;
+	}
+});
