@@ -25,12 +25,12 @@ if($activity_id > 0){
   if($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     if(strcmp($row["status"], "in queue")==0) {
-      $sql = "UPDATE `to_do` SET `status`='crossout', done_date = CURRENT_TIMESTAMP WHERE to_do.owner_id=$id AND to_do.id=$activity_id";
+      $sql = "UPDATE `to_do` SET `status`='crossout', done_date=CURRENT_TIMESTAMP WHERE to_do.owner_id=$id AND to_do.id=$activity_id";
       $conn->query($sql);
       $cmp = "statue = crossout";
     }
     else {
-      $sql = "UPDATE `to_do` SET `status`='in queue', done_date = NULL WHERE to_do.owner_id=$id AND to_do.id=$activity_id";
+      $sql = "UPDATE `to_do` SET `status`='in queue', done_date=NULL WHERE to_do.owner_id=$id AND to_do.id=$activity_id";
       $conn->query($sql);
       $cmp = "statue = in queue";
     }
@@ -50,7 +50,7 @@ if($activity_id > 0){
   $response = array("result"=>1,"todos"=>$todos);
 }
 else {
-  $sql = "UPDATE `to_do` SET `status`='removed' WHERE to_do.owner_id=$id AND date(CONVERT_TZ(to_do.done_date,'+00:00','+7:00')) < date(CONVERT_TZ(CURRENT_TIMESTAMP,'+00:00','+7:00'))";
+  $sql = "UPDATE `to_do` SET `status`='removed', 'remove_date'=CURRENT_TIMESTAMP WHERE to_do.owner_id=$id AND date(CONVERT_TZ(to_do.done_date,'+00:00','+7:00')) < date(CONVERT_TZ(CURRENT_TIMESTAMP,'+00:00','+7:00'))";
   $conn->query($sql);
   $cmp = $activity_id;
 }
