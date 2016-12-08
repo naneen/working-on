@@ -6,6 +6,7 @@ function addToDo(todo, place){
     dataType: 'json',
 
     success: function(result){
+      // console.log('[server] ' + result);
       if(result.status == 1) {
         document.location.reload(true);
       }
@@ -151,14 +152,15 @@ $("#todo-input").keypress(function(event){
 	}
 	else {
 		var text = $("#todo-input").val().trim();
+    console.log("[underlist] " + text);
 		var firstChar = text.substring(0, 1);
 		if(firstChar == "+"){
 			addToDo(text.substring(1, text.length).trim(), "underlist");
-			console.log(text.substring(1, text.length));
+			// console.log(text.substring(1, text.length));
 		}
 		else {
       addToDo(text, "underlist");
-			console.log(text);
+			// console.log(text);
 		}
     return false;
 	}

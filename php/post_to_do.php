@@ -7,6 +7,7 @@ $password = "root";
 $dbname = "newDB";
 
 $text = $_POST["status_text"];
+// $text = .$mysqli->real_escape_string($text1);
 $id = $_SESSION['ez_wko_id'];
 
 // Create connection
@@ -21,6 +22,7 @@ function startsWith($haystack, $needle) {
 	return (substr($haystack, 0, $length) === $needle);
 }
 
+$text = $conn->real_escape_string($text);
 $text_arr = explode( ' ', $text );
 $tag_array = array();
 foreach ($text_arr as $value) {
@@ -70,4 +72,5 @@ if(sizeof($tag_array) > 0) {
 }
 
 echo json_encode($result);
+// echo json_encode($text);
 ?>
