@@ -74,4 +74,5 @@ if(isset($_SESSION['ez_wko_id']) && $_SESSION['ez_wko_id'] != -1) {
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/main.js"></script>
 	<script src="js/index.js"></script>
+	<script src="js/todo.js"></script>
 </body>

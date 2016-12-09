@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 $servername = "localhost:8889";
 $username = "root";
 $password = "root";
@@ -50,7 +49,7 @@ if($activity_id > 0){
   $response = array("result"=>1,"todos"=>$todos);
 }
 else {
-  $sql = "UPDATE `to_do` SET `status`='removed', remove_date=CURRENT_TIMESTAMP WHERE to_do.owner_id=$id AND date(CONVERT_TZ(to_do.done_date,'+00:00','+7:00')) < date(CONVERT_TZ(CURRENT_TIMESTAMP,'+00:00','+7:00'))";
+  $sql = "UPDATE `to_do` SET `status`='removed', remove_date=CURRENT_TIMESTAMP WHERE date(CONVERT_TZ(to_do.done_date,'+00:00','+7:00')) < date(CONVERT_TZ(CURRENT_TIMESTAMP,'+00:00','+7:00'))";
   $conn->query($sql);
   $cmp = $activity_id;
 }

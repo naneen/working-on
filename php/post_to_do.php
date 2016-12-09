@@ -1,13 +1,11 @@
 <?php
 session_start();
-
 $servername = "localhost:8889";
 $username = "root";
 $password = "root";
 $dbname = "newDB";
 
 $text = $_POST["status_text"];
-// $text = .$mysqli->real_escape_string($text1);
 $id = $_SESSION['ez_wko_id'];
 
 // Create connection
@@ -54,7 +52,6 @@ if(sizeof($tag_array) > 0) {
 			$t_id = $row['id'];
 		}
 
-		// $sql = "SELECT id FROM to_do WHERE added_date > CURRENT_DATE AND owner_id = " . $id . " ORDER BY start_time DESC LIMIT 1";
     $sql = "SELECT id FROM to_do WHERE owner_id = " . $id . " ORDER BY added_date DESC LIMIT 1";
 		$result = $conn->query($sql);
 		$row = $result->fetch_assoc();
@@ -72,5 +69,4 @@ if(sizeof($tag_array) > 0) {
 }
 
 echo json_encode($result);
-// echo json_encode($text);
 ?>

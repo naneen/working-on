@@ -62,7 +62,7 @@ function getToDoList(lists) {
   var strHTML = "";
   var previousTag = "";
 
-  updateStatus(-1);
+  // updateStatus(-1);
 
 	for(var i=0; i<lists.length; i++) {
     var owner_id = lists[i].owner_id;
@@ -137,7 +137,7 @@ function updateStatus (id) {
     dataType: 'json',
 
     success: function(result){
-      // console.log(result);
+      console.log(result);
     },
 
     error: function(result) {

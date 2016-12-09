@@ -4,6 +4,7 @@ $.ajax({
 	dataType: 'json',
 
 	success: function(result){
+	  updateStatus(-2);
 		for(var i=0; i<result.persons.length; i++) {
 			addPersonHtml(result.persons[i]);
 		}
