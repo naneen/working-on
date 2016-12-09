@@ -105,10 +105,14 @@ $_SESSION['timeout'] = time();
 				<div id="todogroup" style="display:none">
 					<div id="checkboxlist"></div>
 
-					<div id="todo-textarea" class="form-group">
-						<textarea class="form-control input ui-autocomplete-input" id="todo-input" type="text" placeholder="Add to do task with #project-name" rows="1" style="resize: none;"></textarea>
-						<span id="td-error" class="help-block" style="display:none;">You must include at least 1 tag.</span>
+					<div class="checkbox" id="todo-textarea">
+					  <label class="col-xs-12 col-md-12" style="margin-bottom: 20px;">
+							<input type="checkbox" id="cb-infrontof-input" value="" style="margin-top: 10px;">
+							<input class="form-control input ui-autocomplete-input" id="todo-input" type="text" placeholder="Add to do task with #project-name" rows="1" style="resize: none;">
+							<span id="td-error" class="help-block" style="display:none;">You must include at least 1 tag.</span>
+						</label>
 					</div>
+
 				</div>
 
 				<hr id="divider">

@@ -102,29 +102,31 @@ body {
 		padding: 0;
 	}
 
-	#checkboxlist {
+	#checkboxlist{
 		padding: 0 0 0 10px;
 	}
 
-	label {
-	  display: block;
-	  padding-left: 15px;
-	}
-
-	input {
-	  width: 13px;
-	  height: 13px;
-	  padding: 0;
-	  margin:0;
-	  vertical-align: bottom;
-	  position: relative;
-	  top: -1px;
-	  *overflow: hidden;
+	#todo-textarea {
+		padding: 0 0 0 27px;
 	}
 }
 
+#cb-infrontof-input {
+	margin-top: 20px;
+}
+
 #todo-input {
-	margin-top: 8px;
+	/*margin-top: 5px;*/
+	float: left;
+	width: 100%;
+	border: 0;
+  background: transparent;
+  border-bottom: 1px solid;
+	border-radius: 0;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+	padding: 0;
 }
 
 .navbar-brand > img {

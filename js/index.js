@@ -17,8 +17,6 @@ $.ajax({
 function addPersonHtml(person) {
 	var id = person.id;
 	var src = 'images/profile' + id + '.jpg';
-	// var tmp = '<div class="col-xs-6 col-md-4 col-lg-3"><img onClick="selectPerson(' + id + ')" class="img-login" src="' + src + '"></div>';
-	// var tmp = '<div class="col-xs-6 col-md-4 col-lg-3"><img onClick="selectPerson(' + id + ')" class="img-circle img-login"src="' + src + '"></div>';
 	var tmp = '<div class="col-xs-6 col-md-4 col-lg-3"><div class = "user-image" onClick="selectPerson(' + id + ')" style = "background-image: url(' + src + ')"><div class="after" ><p>Log in</p></div></div></div>';
 	$("#person-list").append(tmp);
 }
