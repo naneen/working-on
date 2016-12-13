@@ -58,11 +58,9 @@ function getTagInList(lists) {
 }
 
 function getToDoList(lists) {
-	var strHTML = "<tbody><tr>";
   var strHTML = "";
   var previousTag = "";
-
-  // updateStatus(-1);
+  var strDropdown = "";
 
 	for(var i=0; i<lists.length; i++) {
     var owner_id = lists[i].owner_id;
@@ -80,7 +78,11 @@ function getToDoList(lists) {
 
     var str = '<div class="checkbox"><label style="word-wrap:break-word"><input type="checkbox" class="cb' + task_id + '" value="' + task_id + '"><span class="sp' + task_id + '">'+ lists[i].task +'</span></input></label></div>';
 		strHTML = strHTML + str;
+
+    strDropdown += "<li><a href='#'>" + lists[i].task + "</a></li>";
 	}
+  $("#td-dropdown").append(strDropdown);
+
 	return strHTML;
 }
 
@@ -92,9 +94,27 @@ $.ajax({
 	success: function(result) {
     if(result.todos.length > 0) {
       $('#todogroup').show();
+      $('#td-dropdown').css("display", "");
       var tableHTML = getToDoList(result.todos);
       $("#checkboxlist").append(tableHTML);
       isCrossout(result.todos);
+
+      $( "#activity-input" ).keypress(function() {
+        console.log( "Handler for .keypress() called." );
+        $('#dropdown-group').removeClass('open');
+        $('.dropdown').css("aria-expanded", "false");
+      });
+
+      $('.dropdown li > a').click(function(e){
+        $('#activity-input').val(this.innerHTML);
+      });
+      // $( "#activity-input" ).click(function() {
+      //   console.log( "Handler for .click() called." );
+      // });
+
+      // $(document).click(function(){
+      //   $("#dropdown").hide();
+      // });
     }
     else {
       // console.log("You didn't add anything to the list.");
@@ -156,11 +176,9 @@ $("#todo-input").keypress(function(event){
 		var firstChar = text.substring(0, 1);
 		if(firstChar == "+"){
 			addToDo(text.substring(1, text.length).trim(), "underlist");
-			// console.log(text.substring(1, text.length));
 		}
 		else {
       addToDo(text, "underlist");
-			// console.log(text);
 		}
     return false;
 	}

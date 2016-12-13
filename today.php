@@ -83,7 +83,13 @@ $_SESSION['timeout'] = time();
 			</div>
 			<div class="row">
 				<div id="input-group" class="form-group">
-					<div class="col-xs-12 col-md-12"><textarea class="form-control input-lg" id="activity-input" type="text" placeholder="Doing something with #project-name" rows="1" style="resize: none;"></textarea></div>
+					<div class="col-xs-12 col-md-12">
+						<div class="dropdown" id="dropdown-group">
+							<textarea class="form-control input-lg dropdown-toggle" id="activity-input" data-toggle="dropdown" type="text" placeholder="Doing something with #project-name" rows="1" style="resize: none;"></textarea>
+							<ul class="dropdown-menu" id="td-dropdown" style="display:none; width:100%; margin-top:0; overflow: auto;">
+							</ul>
+						</div>
+					</div>
 					<span id="help-block" class="help-block" style="display:none; padding-left:20px">You must include at least 1 tag.</span>
 				</div>
 			</div>
@@ -94,7 +100,6 @@ $_SESSION['timeout'] = time();
 			</div>
 		</div>
 	</div>
-
 
 	<div class="container">
 		<div class="row">
