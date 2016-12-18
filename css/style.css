@@ -79,14 +79,11 @@ body {
 	margin: 20px 0;
 }
 
-#todogroup {
-	padding: 0 0 0 75px;
-}
-
 #checkboxlist {
 	/*padding: 0 0 0 75px;*/
   max-height: 300px;
   overflow-y: auto;
+	padding-left: 0;
 }
 
 .tag_subtitle {
@@ -97,8 +94,16 @@ body {
 	padding: 0 0 0 17px;
 }
 
+#todo-textarea{
+	margin-top: 0;
+}
+
+.todogroup {
+	padding: 0 0 0 75px;
+}
+
 @media (max-width: 768px){
-	#todogroup {
+	.todogroup {
 		padding: 0;
 	}
 
@@ -120,7 +125,7 @@ body {
 	width: 100%;
 	border: 0;
   background: transparent;
-  border-bottom: 1px solid;
+  border-bottom: 1px solid #d4d4d4;
 	border-radius: 0;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;

@@ -1,3 +1,7 @@
+var admin = 12;
+var currentEmployee = "";
+getCurrentEmployee();
+
 function formatAMPM(date) {
   var hours = date.getHours();
   var minutes = date.getMinutes();
@@ -240,7 +244,9 @@ function getActivityList(activities, userFirst) {
       }
 		}
 
-		str = str + '</div></div></div></div>';
+    str += '<div id="activity' + owner_id + '" class="todogroup"></div>';
+
+    str += '</div></div></div></div>';
 		if(userFirst && activities[i].owner_name == "You") {
       returnOwnActivity(str);
 		} else {
@@ -253,4 +259,19 @@ function getActivityList(activities, userFirst) {
 
 function returnOwnActivity(str) {
   $("#ownActivity").html(str);
+}
+
+function getCurrentEmployee() {
+  $.ajax({
+		type: 'POST',
+		url: 'php/get_person.php',
+		dataType: 'json',
+
+		success: function(result){
+			currentEmployee = result.persons;
+		},
+		error: function(result) {
+			console.log(result);
+		}
+	});
 }

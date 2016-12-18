@@ -34,19 +34,6 @@ if($activity_id > 0){
       $cmp = "statue = in queue";
     }
   }
-  $todos = array();
-  if ($result->num_rows > 0) {
-  	while($row = $result->fetch_assoc()) {
-
-  		$tmp_arr = array(
-  				'to_do_id' => $row["id"],
-  				'status' => $row["status"],
-  				'done_date' => $row["done_date"]);
-
-  		array_push($todos, $tmp_arr);
-  	}
-  }
-  $response = array("result"=>1,"todos"=>$todos);
 }
 else {
   $sql = "UPDATE `to_do` SET `status`='removed', remove_date=CURRENT_TIMESTAMP WHERE date(CONVERT_TZ(to_do.done_date,'+00:00','+7:00')) < date(CONVERT_TZ(CURRENT_TIMESTAMP,'+00:00','+7:00'))";

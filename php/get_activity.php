@@ -12,7 +12,7 @@ if ($conn->connect_error) {
 	die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT p.id owner_id, a.id activity_id, p.firstname, a.status_text status_text, a.start_time, a.end_time, a.updated_at, CURRENT_TIMESTAMP AS 'time', IF( ISNULL(a.status_text), 0, IF(ISNULL(a.end_time), 1, 2) ) online FROM person p LEFT JOIN ( SELECT a1.* FROM ( SELECT * FROM activity WHERE activity.delete = 0 ) a1 LEFT JOIN ( SELECT * FROM activity WHERE activity.delete = 0 ) a2 ON( a1.owner_id = a2.owner_id AND a1.id < a2.id ) WHERE a2.id IS NULL ) a ON p.id = a.owner_id WHERE p.status = 1 AND a.updated_at >= CURRENT_DATE ORDER BY a.updated_at DESC";
+$sql = "SELECT p.id owner_id, a.id activity_id, p.firstname, a.status_text status_text, a.start_time, a.end_time, a.updated_at, CURRENT_TIMESTAMP AS 'time', IF( ISNULL(a.status_text), 0, IF(ISNULL(a.end_time), 1, 2) ) online FROM person p LEFT JOIN ( SELECT a1.* FROM ( SELECT * FROM activity WHERE activity.delete = 0 ) a1 LEFT JOIN ( SELECT * FROM activity WHERE activity.delete = 0 ) a2 ON( a1.owner_id = a2.owner_id AND a1.id < a2.id ) WHERE a2.id IS NULL ) a ON p.id = a.owner_id WHERE p.status = 1 AND date(CONVERT_TZ(a.updated_at,'+00:00','+7:00')) >= date(CONVERT_TZ(CURRENT_TIMESTAMP,'+00:00','+7:00')) ORDER BY a.updated_at DESC";
 $conn->query('SET SQL_BIG_SELECTS=1');
 
 $result = $conn->query($sql);
@@ -39,7 +39,7 @@ if ($result->num_rows > 0) {
 	}
 }
 
-//People who haven't yet gone online today
+//People who haven't yet gonre online today
 $sql = "SELECT p.id owner_id, p.firstname, NULL status_text, p.last_login start_time, NULL end_time, NULL updated_at, CURRENT_TIMESTAMP AS 'time', 0 online
 FROM person p
 WHERE id NOT IN (
@@ -47,8 +47,6 @@ select a.owner_id
 from activity a
 where a.start_time >= CURDATE() AND a.delete=0
 GROUP by a.owner_id) AND p.status > 0";
-
-// $sql = "SELECT p.id owner_id, p.firstname, NULL status_text, p.last_login start_time, NULL end_time, p.last_login updated_at, CURRENT_TIMESTAMP AS 'time', 0 online FROM person p where p.status > 0  AND p.last_login < CURRENT_DATE";
 
 $result = $conn->query($sql);
 
